@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://c72qxw66afnly"]
+
+[ext_resource type="Script" uid="uid://ddym5no2vs2eb" path="res://scripts/ui.gd" id="1_ui"]
+
+[node name="UI" type="CanvasLayer" unique_id=1159539810]
+scale = Vector2(1.47, 1.47)
+transform = Transform2D(1.47, 0, 0, 1.47, 0, 0)
+script = ExtResource("1_ui")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=592374046]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 320.0
+offset_bottom = 120.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1707310655]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1808514710]
+layout_mode = 2
+text = "HP: "
+vertical_alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=672272565]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+value = 100.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=914635181]
+layout_mode = 2
+
+[node name="XPLabel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1039360331]
+layout_mode = 2
+text = "XP: "
+vertical_alignment = 1
+
+[node name="XPBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2" unique_id=1405344135]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+max_value = 50.0
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer" unique_id=2079689617]
+layout_mode = 2
+text = "Lv: 1"
+
+[node name="TimeLabel" type="Label" parent="." unique_id=160607981]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 40.0
+text = "00:00"
+horizontal_alignment = 2
+
+[node name="WaveLabel" type="Label" parent="." unique_id=860290698]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 40.0
+text = "Wave 1"
+horizontal_alignment = 1
+
+[node name="GameOverPanel" type="Panel" parent="." unique_id=9953284]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel" unique_id=1451880311]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="GameOverLabel" type="Label" parent="GameOverPanel/VBoxContainer" unique_id=1736629607]
+layout_mode = 2
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="TimeResultLabel" type="Label" parent="GameOverPanel/VBoxContainer" unique_id=1613092047]
+layout_mode = 2
+text = "生存時間: 00:00"
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="GameOverPanel/VBoxContainer" unique_id=883609119]
+layout_mode = 2
+text = "リトライ"

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://main_scene"]
+
+[ext_resource type="PackedScene" uid="uid://player_scene" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://enemy_scene" path="res://scenes/enemy.tscn" id="2_enemy"]
+[ext_resource type="PackedScene" uid="uid://bullet_scene" path="res://scenes/bullet.tscn" id="3_bullet"]
+[ext_resource type="PackedScene" uid="uid://ui_scene" path="res://scenes/ui.tscn" id="4_ui"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_gm"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.1, 1)
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("5_gm")
+enemy_scene = ExtResource("2_enemy")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Player" parent="World" instance=ExtResource("1_player")]
+position = Vector2(540, 960)
+bullet_scene = ExtResource("3_bullet")
+
+[node name="EnemyContainer" type="Node2D" parent="World"]
+groups=["enemy_container"]
+
+[node name="BulletContainer" type="Node2D" parent="World"]
+groups=["bullet_container"]
+
+[node name="UI" parent="." instance=ExtResource("4_ui")]
