@@ -6,3 +6,6 @@
 
 # Ignore build files
 /build/
+
+.env.prod
+.env
