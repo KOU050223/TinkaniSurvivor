@@ -3,3 +3,6 @@
 /android/
 
 .DS_Store
+
+# Ignore build files
+/build/
