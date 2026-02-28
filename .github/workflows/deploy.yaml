@@ -1,15 +1,10 @@
-name: Deploy to GitHub Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -38,15 +33,33 @@ jobs:
       - name: Export Web
         run: godot --headless --export-release "Web" build/web/index.html
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Compress large files for Cloudflare Pages (25MB limit)
+        run: |
+          cd build/web
+          gzip -9 index.wasm
+          mv index.wasm.gz index.wasm
+          ls -lh index.wasm
+          cp $GITHUB_WORKSPACE/_headers .
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
+          name: web-build
           path: build/web
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy build/web --project-name=tinkani-survivor
